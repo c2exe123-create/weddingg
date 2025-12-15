@@ -47,11 +47,21 @@ body {
 </head>
 
 <body>
-
-<!-- 🎵 موسيقى هادئة -->
-<audio autoplay loop>
+<!-- موسيقى خلفية -->
+<audio id="bgMusic" autoplay loop muted>
   <source src="music.mp3" type="audio/mpeg">
+  متصفحك لا يدعم تشغيل الصوت
 </audio>
+
+<script>
+  // تشغيل الصوت بعد أول لمسة (مهم للموبايل والمتصفحات الحديثة)
+  document.addEventListener('click', function () {
+    const music = document.getElementById('bgMusic');
+    music.muted = false;
+    music.play();
+  }, { once: true });
+</script>
+  
 
 <div class="container">
   <h1>💍 هشام & ليلى 💍</h1>
