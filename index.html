@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>حجز عروس</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#2c3e50,#e84393);
+    font-family:Tahoma, Arial;
+    color:white;
+    direction:rtl;
+}
+.card{
+    background:rgba(0,0,0,0.45);
+    padding:40px 30px;
+    border-radius:20px;
+    text-align:center;
+    max-width:420px;
+    width:90%;
+}
+h1{
+    margin-bottom:10px;
+    font-size:28px;
+}
+.names{
+    font-size:22px;
+    margin-bottom:25px;
+}
+.timer{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    justify-content:center;
+}
+.box{
+    background:rgba(255,255,255,0.2);
+    padding:15px;
+    border-radius:15px;
+    min-width:80px;
+}
+.number{
+    font-size:28px;
+    font-weight:bold;
+}
+.label{
+    font-size:13px;
+}
+.footer{
+    margin-top:25px;
+    font-size:14px;
+    opacity:0.85;
+}
+</style>
+</head>
+
+<body>
+<div class="card">
+    <h1>💍 حجز عروس</h1>
+    <div class="names">
+        العريس: <b>هشام</b><br>
+        العروس: <b>ليلى</b>
+    </div>
+
+    <div class="timer">
+        <div class="box"><div class="number" id="years">0</div><div class="label">سنوات</div></div>
+        <div class="box"><div class="number" id="days">0</div><div class="label">أيام</div></div>
+        <div class="box"><div class="number" id="hours">0</div><div class="label">ساعات</div></div>
+        <div class="box"><div class="number" id="minutes">0</div><div class="label">دقائق</div></div>
+        <div class="box"><div class="number" id="seconds">0</div><div class="label">ثواني</div></div>
+    </div>
+
+    <div class="footer">
+        ⏳ العد التنازلي ليوم الفرح
+    </div>
+</div>
+
+<script>
+const now = new Date();
+const target = new Date(
+    now.getFullYear() + 4,
+    now.getMonth(),
+    now.getDate(),
+    now.getHours(),
+    now.getMinutes(),
+    now.getSeconds()
+);
+
+function updateCountdown(){
+    const current = new Date();
+    let diff = target - current;
+    if(diff < 0) diff = 0;
+
+    const seconds = Math.floor(diff / 1000) % 60;
+    const minutes = Math.floor(diff / (1000 * 60)) % 60;
+    const hours   = Math.floor(diff / (1000 * 60 * 60)) % 24;
+    const totalDays = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const years = Math.floor(totalDays / 365);
+    const days  = totalDays % 365;
+
+    document.getElementById("years").textContent = years;
+    document.getElementById("days").textContent = days;
+    document.getElementById("hours").textContent = hours;
+    document.getElementById("minutes").textContent = minutes;
+    document.getElementById("seconds").textContent = seconds;
+}
+
+updateCountdown();
+setInterval(updateCountdown,1000);
+</script>
+</body>
+</html>
