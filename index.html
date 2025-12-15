@@ -2,116 +2,88 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>حجز عروس</title>
+<title>Hisham & Laila</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
-body{
-    margin:0;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:linear-gradient(135deg,#2c3e50,#e84393);
-    font-family:Tahoma, Arial;
-    color:white;
-    direction:rtl;
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #2c3e50, #e84393);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Tahoma, Arial;
+  color: white;
+  direction: rtl;
 }
-.card{
-    background:rgba(0,0,0,0.45);
-    padding:40px 30px;
-    border-radius:20px;
-    text-align:center;
-    max-width:420px;
-    width:90%;
+
+.container {
+  background: rgba(255,255,255,0.15);
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
 }
-h1{
-    margin-bottom:10px;
-    font-size:28px;
+
+.countdown {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
-.names{
-    font-size:22px;
-    margin-bottom:25px;
+
+.box {
+  background: rgba(0,0,0,0.35);
+  padding: 15px;
+  border-radius: 10px;
+  min-width: 90px;
 }
-.timer{
-    display:flex;
-    flex-wrap:wrap;
-    gap:12px;
-    justify-content:center;
-}
-.box{
-    background:rgba(255,255,255,0.2);
-    padding:15px;
-    border-radius:15px;
-    min-width:80px;
-}
-.number{
-    font-size:28px;
-    font-weight:bold;
-}
-.label{
-    font-size:13px;
-}
-.footer{
-    margin-top:25px;
-    font-size:14px;
-    opacity:0.85;
+
+.num {
+  font-size: 32px;
+  font-weight: bold;
 }
 </style>
 </head>
 
 <body>
-<div class="card">
-    <h1>💍 حجز عروس</h1>
-    <div class="names">
-        العريس: <b>هشام</b><br>
-        العروس: <b>ليلى</b>
-    </div>
 
-    <div class="timer">
-        <div class="box"><div class="number" id="years">0</div><div class="label">سنوات</div></div>
-        <div class="box"><div class="number" id="days">0</div><div class="label">أيام</div></div>
-        <div class="box"><div class="number" id="hours">0</div><div class="label">ساعات</div></div>
-        <div class="box"><div class="number" id="minutes">0</div><div class="label">دقائق</div></div>
-        <div class="box"><div class="number" id="seconds">0</div><div class="label">ثواني</div></div>
-    </div>
+<div class="container">
+  <h1>💍 هشام & ليلى 💍</h1>
+  <h2>نعدّ الأيام حتى يومنا الكبير</h2>
 
-    <div class="footer">
-        ⏳ العد التنازلي ليوم الفرح
-    </div>
+  <div class="countdown">
+    <div class="box"><div class="num" id="y"></div>سنين</div>
+    <div class="box"><div class="num" id="d"></div>أيام</div>
+    <div class="box"><div class="num" id="h"></div>ساعات</div>
+    <div class="box"><div class="num" id="m"></div>دقائق</div>
+    <div class="box"><div class="num" id="s"></div>ثواني</div>
+  </div>
 </div>
 
 <script>
-const now = new Date();
-const target = new Date(
-    now.getFullYear() + 4,
-    now.getMonth(),
-    now.getDate(),
-    now.getHours(),
-    now.getMinutes(),
-    now.getSeconds()
-);
+const target = new Date();
+target.setFullYear(target.getFullYear() + 4);
 
-function updateCountdown(){
-    const current = new Date();
-    let diff = target - current;
-    if(diff < 0) diff = 0;
+setInterval(() => {
+  const now = new Date();
+  let diff = target - now;
 
-    const seconds = Math.floor(diff / 1000) % 60;
-    const minutes = Math.floor(diff / (1000 * 60)) % 60;
-    const hours   = Math.floor(diff / (1000 * 60 * 60)) % 24;
-    const totalDays = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const years = Math.floor(totalDays / 365);
-    const days  = totalDays % 365;
+  const s = Math.floor(diff/1000)%60;
+  const m = Math.floor(diff/60000)%60;
+  const h = Math.floor(diff/3600000)%24;
+  const days = Math.floor(diff/86400000);
+  const y = Math.floor(days/365);
+  const d = days%365;
 
-    document.getElementById("years").textContent = years;
-    document.getElementById("days").textContent = days;
-    document.getElementById("hours").textContent = hours;
-    document.getElementById("minutes").textContent = minutes;
-    document.getElementById("seconds").textContent = seconds;
-}
-
-updateCountdown();
-setInterval(updateCountdown,1000);
+  yEl=y;  
+  document.getElementById("y").innerText=y;
+  document.getElementById("d").innerText=d;
+  document.getElementById("h").innerText=h;
+  document.getElementById("m").innerText=m;
+  document.getElementById("s").innerText=s;
+},1000);
 </script>
+
 </body>
 </html>
